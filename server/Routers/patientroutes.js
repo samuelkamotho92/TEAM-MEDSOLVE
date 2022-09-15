@@ -9,4 +9,12 @@ patientRoute
 patientRoute
 .route('/login')
 .post(patientauthcontrol.patientLogin)
+
+patientRoute
+.route('/resetToken')
+.post(patientauthcontrol.forgottenPassword)
+
+// patientRoute
+// .route('/resetPassword/token')
+// .patch(patientauthcontrol.forgottenPassword)
 module.exports = patientRoute;

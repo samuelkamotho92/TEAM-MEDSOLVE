@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const Schema = mongoose.Schema;
 const Patientregschema = new Schema({
     name:{
@@ -33,7 +34,10 @@ const Patientregschema = new Schema({
         type:String,
         enum:["patient","admin","hospital"],
         default:"patient"
-    }
+    },
+    resetTokenSetAt:Date,
+    passwordresetToken:String,
+    resetTokenexpires: Date
 })
 Patientregschema.pre("save",async function(next){
     if(!this.isModified("password")){
@@ -56,6 +60,16 @@ Patientregschema.statics.login = async function (email,password) {
     }
     throw Error("incorrect email");
   }
+
+Patientregschema.methods.resetToken = async function(email){
+const token = crypto.randomBytes(32).toString('hex');
+this.passwordresetToken = crypto.createHash('sha256').update(token).digest('hex');
+this.resetTokenexpires= Date.now() + 60 * 1000
+console.log(token, this.passwordresetToken);
+return token
+}
+
+
 const patientmodel = 
 mongoose.model("patientregistration",Patientregschema);
 module.exports = patientmodel;

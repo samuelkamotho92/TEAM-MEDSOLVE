@@ -38,6 +38,25 @@ resp.status(200).json({
         })
     }
 }
-
+const forgottenPassword  = async(req,resp)=>{
+    try{
+    const {email} = req.body;
+    const getHospital = 
+    await hospitalRegmodel.findOne({email});
+    console.log(getHospital,'my hospital');
+    const getToken = await getHospital.resetToken();
+    console.log(getToken);
+    //save to database
+    await getHospital.save({validateBeforeSave:false});
+resp.status(200).json({
+    status:'success',
+    resetToken:getToken
+})
+    }catch(err){
+resp.status(404).json({
+    status:'error',
+    err
+})}
+}
 module.exports = 
-{hospitalReg,hospitalLogin};
+{hospitalReg,hospitalLogin,forgottenPassword};

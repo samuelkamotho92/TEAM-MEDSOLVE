@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const Schema = mongoose.Schema;
 const Hospitalregschema = new Schema({
     name:{
@@ -41,7 +42,10 @@ const Hospitalregschema = new Schema({
         type:String,
         enum:["patient","admin","hospital"],
         default:"hospital"
-    }
+    },
+    resetTokenSetAt:Date,
+    passwordresetToken:String,
+    resetTokenexpires:Date
 })
 
 Hospitalregschema.pre("save",async function(next){
@@ -68,6 +72,14 @@ Hospitalregschema.statics.login =
     }
     throw Error("incorrect email");
   }
+
+  Hospitalregschema.methods.resetToken = async function(email){
+    const token = crypto.randomBytes(32).toString('hex');
+    this.passwordresetToken = crypto.createHash('sha256').update(token).digest('hex');
+    this.resetTokenexpires= Date.now() + 60 * 1000
+    console.log(token, this.passwordresetToken);
+    return token
+    }
 
 const hospitalmodel = 
 mongoose.model("hospitalregistration",Hospitalregschema);
