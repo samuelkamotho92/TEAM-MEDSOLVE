@@ -1,17 +1,15 @@
 const nodemailer = require('nodemailer');
 const sendEmail = async(options)=>{
- const transport = nodemailer.createTransport({
-        host:process.env.EMAIL_SERVICES,
-        port:process.env.EMAIL_PORT,
-        auth: {
-          user:process.env.EMAIL_USER,
-          pass:process.env.APP_PASSWORD
-        },
-    tls: 
-    {
-	    rejectUnauthorized: false
-    }
-      });
+  console.log(options.email,options.message,options.subject)
+
+const transport = nodemailer.createTransport({
+  host:process.env.EMAIL_SERVICE,
+  port: 2525,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.APP_PASSWORD
+  }
+});
     const mailOptions = {
         from: 'teammedsolve@gmail.com',
         to: options.email,
@@ -19,6 +17,6 @@ const sendEmail = async(options)=>{
         text: options.message
       };
       await transport.sendMail(mailOptions)
-    console.log(options.email,options.message,options.subject)
 }
 module.exports = sendEmail;
+

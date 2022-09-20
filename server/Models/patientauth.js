@@ -48,7 +48,8 @@ next()
     this.passwordConfirm = undefined;
     next();
 })
-Patientregschema.statics.login = async function (email,password) {
+Patientregschema.statics.login =
+ async function (email,password) {
     const patient = await this.findOne({email}); 
     if(patient)
     {
@@ -63,8 +64,9 @@ Patientregschema.statics.login = async function (email,password) {
 
 Patientregschema.methods.resetToken = async function(email){
 const token = crypto.randomBytes(32).toString('hex');
-this.passwordresetToken = crypto.createHash('sha256').update(token).digest('hex');
-this.resetTokenexpires= Date.now() + 60 * 1000
+this.passwordresetToken = 
+crypto.createHash('sha256').update(token).digest('hex');
+this.resetTokenexpires= Date.now() + 60  * 60 * 1000
 console.log(token, this.passwordresetToken);
 return token
 }

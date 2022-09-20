@@ -1,6 +1,7 @@
 const express = require('express');
 const patientRoutes = require('./Routers/patientroutes');
-const hospitalRoutes  = require('./Routers/hospitalroutes')
+const hospitalRoutes  = require('./Routers/hospitalroutes');
+const serviceRoutes = require('./Routers/services');
 const app = express();
 app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"));
@@ -13,4 +14,5 @@ app.get('/',(req,resp)=>{
 });
 app.use('/medsolve/v1/patient',patientRoutes);
 app.use('/medsolve/v1/hospital',hospitalRoutes);
+app.use('/medsolve/v1/services',serviceRoutes);
 module.exports = app;

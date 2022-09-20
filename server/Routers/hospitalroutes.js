@@ -14,4 +14,17 @@ hospitalRoute
 hospitalRoute
 .route('/resetToken')
 .post(hospitalauthcontrol.forgottenPassword)
+
+hospitalRoute
+.route('/resetPassword/:token')
+.patch(hospitalauthcontrol.resetPassword)
+
+hospitalRoute
+.route('/getAllhospital')
+.get(hospitalauthcontrol.getAllhospital)
+
+hospitalRoute
+.route('/getmyhospital')
+.post(hospitalauthcontrol.getMyhospital)
+
 module.exports = hospitalRoute;
