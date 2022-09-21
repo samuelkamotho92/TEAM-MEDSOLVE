@@ -35,5 +35,47 @@ resp.status(404).json({
 })
     }
 }
+const updateService = async(req,resp)=>{
+    try
+    {
+        const id = req.params.id;
+        ///find by Id and update
+        const updatedValue = 
+        await servicemodel.findByIdAndUpdate(id,req.body,{
+            runValidators:true,
+            new : true
+        });
+        resp.status(200).json({
+            status:'success',
+           data:updatedValue
+        })
+    }catch(err){
+resp.status(404).json({
+    status:'failure',
+    err
+})
+    }
+}
+
+const deleteService = async(req,resp)=>{
+    try{
+        const id = req.params.id;
+        //find by id and Delete
+    const deletedService = await findByIdAndDelete(id);
+    resp.status(200).json({
+        status:'success',
+        message:'deleted succefully',
+    })
+    }catch(err){
+resp.status(404).json({
+    status:'failure',
+})
+    }
+
+}
 module.exports =
- {uploadServices,getServices}
+ {
+uploadServices,
+getServices,
+updateService,
+deleteService}

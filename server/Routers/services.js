@@ -9,5 +9,12 @@ serviceRoute
 .route('/getServices')
 .post(serviceCont.getServices)
 
+serviceRoute
+.route('/updateService/:id')
+.patch(serviceCont.updateService)
+
+serviceRoute
+.route('/deleteService/:id')
+.delete(serviceCont.deleteService)
 
 module.exports = serviceRoute;
