@@ -12,17 +12,25 @@ const generateTk = (id)=>{
 }
 const crypto = require('crypto');
 const patientReg = async(req,resp)=>{
-console.log(req.body);
-const {name,email,password,passwordConfirm,role} = 
-req.body;
-const regPat = 
-await patientRegmodel.create({name,email,password,
-    passwordConfirm,role});
-resp.status(200).json({
-    status:'success',
-    message:'user regestered succesfully'
+    try{
+ console.log(req.body);
+        const {name,email,password,passwordConfirm,role} = 
+        req.body;
+        const regPat = 
+        await patientRegmodel.create({name,email,password,
+            passwordConfirm,role});
+        resp.status(200).json({
+            status:'success',
+            message:'Regestered succesfully',
+            redirect:'patientDashboard'
+        })
+        console.log(regPat);
+    }catch(err){
+resp.status(404).json({
+    status:'failure',
+    err
 })
-console.log(regPat);
+    }
 }
 const patientLogin = async (req,resp)=>{
     try{
@@ -37,7 +45,8 @@ resp.cookie('patientCookie',jwtToken,{
 resp.status(200).json({
             status:'success',
             message:"logged in succesfully",
-            data:getPatient
+            redirect:'patientDashboard',
+            getPatient
         })
     }catch(err){
         resp.status(404).json({
@@ -84,6 +93,7 @@ resp.status(404).json({
 
 const resetPassword = async(req,resp)=>{
 const tk = req.params.token
+console.log(req.body);
 console.log(tk);
 try{
     const hashToken = 
@@ -102,7 +112,8 @@ if(getPatient){
     await getPatient.save()
     resp.status(200).json({
     status:'success',
-    message:'password updated succesfully'
+    message:'password updated succesfully',
+    redirect:'patientLogin'
 })
 }
 }catch(err){
@@ -114,7 +125,20 @@ resp.status(404).json({
 }
 
 const logOutpatient = (req,resp)=>{
-resp.cookie("patientCookie","",{maxAge: 1 });
+    try{
+        resp.cookie("patientCookie","",{maxAge: 1 });
+        resp.status(200).json({
+            status:'success',
+            message:'Logged out succesfully',
+            redirect:'patientLogin'
+        })
+    }catch(err){
+resp.status(404).json({
+    status:'failure',
+    err
+})
+    }
+
 }
 
 const getAllpatient = async (req,resp)=>{

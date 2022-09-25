@@ -1,32 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
-import {Routes,Route,Navigate} from 'react-router-dom';
-import Registrationpage from './components/Registration';
-import Dashboard from './components/Dashboard';
-import Login from './components/Login';
-import Resetpass from './components/Resetpassword';
-
+import HospitalDashboard from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import List from "./pages/list/List";
+import Single from "./pages/single/Single";
+import New from "./pages/new/New";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { productInputs, userInputs } from "./formSource";
+import "./style/dark.scss";
+import { useContext } from "react";
+import { DarkModeContext } from "./context/darkModeContext";
+// import patientlogin from './components/Login';
+import SignIn from "./components/Registration";
+import ResetInSide from "./components/Resetpassword";
+import SignInSide from "./components/Login";
+import Newpassword from "./components/forgottenPassword";
+import PatientDashboard from "./components/PatientDashboard/home/Home";
 function App() {
-  return (
-    <div className="App">
-      {
-    <Routes>
-<Route path='/registration' 
-element={<Registrationpage />}>
-  Registration</Route>
-<Route path='/patientDashboard' 
-element={<Dashboard />}>
-Patient Dashbord
-</Route>
-<Route path='/login' 
-element={<Login />}>
-</Route>
-<Route path='/resetpassword' element={<Resetpass />}>
-Resetpassword
-</Route>
-      </Routes>  
-      }
-      App page is working fine
+  const { darkMode } = useContext(DarkModeContext);
+return (
+    <div className={darkMode ? "app dark" : "app"}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            {/* <Route index element={<Home />} /> */}
+            <Route path="patientLogin" element={<SignInSide />}/>
+            <Route path="patientRegistration" element={<SignIn/>}></Route>
+            <Route path="patientPassreset" element={<ResetInSide />}></Route>
+            <Route path="Newpassword" element={<Newpassword />}/>
+            <Route path="login" element={<Login />} />
+            <Route path="patientDashboard" element={<PatientDashboard />}/>
+            <Route path="hospitalDashboard" element={<HospitalDashboard />} />
+            <Route path="users">
+              <Route index element={<List />} />
+              <Route path=":userId" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={userInputs} title="Add New User" />}
+              />
+            </Route>
+            <Route path="products">
+              <Route index element={<List />} />
+              <Route path=":productId" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={productInputs} title="Add New Product" />}
+              />
+            </Route>
+            <Route path='patientDetails'
+            
+            
+            >
+
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

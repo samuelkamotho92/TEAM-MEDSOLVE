@@ -22,6 +22,8 @@ patientRoute
 .route('/getAllpatient')
 .get(patientauthcontrol.getAllpatient);
 
-
+patientRoute
+.route('/patientLogout')
+.get(patientauthcontrol.logOutpatient);
 
 module.exports = patientRoute;

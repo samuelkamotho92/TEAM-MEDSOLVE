@@ -1,4 +1,5 @@
-import  React from 'react';
+import * as React from 'react';
+import {useState,useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,13 +13,15 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {useNavigate} from 'react-router-dom';
+
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-       TEAM MEDSOLVE
+        Team Medsolve
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -28,14 +31,34 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-const SignInSide = ()=>{
-  const handleSubmit = (event) => {
+export default function SignInSide() {
+  const nav = useNavigate();
+const [email,setEmail] = useState();
+const [password,setPassword] = useState();
+
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    setEmail('');
+    setPassword('');
+ console.log(email,password);
+
+ const url = `http://localhost:8080/medsolve/v1/patient/login`;
+ const resp = await fetch(url,{
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({email,password}),
+  credentials:'include',
+  withCredentials:true
+ })
+ const data = await resp.json();
+console.log(data);
+if(data.status === 'success'){
+  alert(`${data.message}`);
+  nav(`/${data.redirect}`)
+}else{
+  console.log(data.err);
+}
+
   };
 
   return (
@@ -80,8 +103,10 @@ const SignInSide = ()=>{
                 id="email"
                 label="Email Address"
                 name="email"
+                value={email}
                 autoComplete="email"
                 autoFocus
+                onChange={(e)=>{setEmail(e.target.value)}}
               />
               <TextField
                 margin="normal"
@@ -91,7 +116,9 @@ const SignInSide = ()=>{
                 label="Password"
                 type="password"
                 id="password"
+                value={password}
                 autoComplete="current-password"
+                onChange={(e)=>{setPassword(e.target.value)}}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -107,12 +134,12 @@ const SignInSide = ()=>{
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="/patientPassreset" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/patientRegistration" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
@@ -125,4 +152,3 @@ const SignInSide = ()=>{
     </ThemeProvider>
   );
 }
-export default SignInSide
