@@ -1,4 +1,4 @@
-import Sidebar from "../../PatientDashboard/sidebar/Sidebar";
+import Sidebar from "../../PatientDashboard/sidebar/patientSidebar";
 import Navbar from "../../PatientDashboard/navbar/Navbar";
 import "./home.scss";
 import Widget from "../../PatientDashboard/widget/Widget";

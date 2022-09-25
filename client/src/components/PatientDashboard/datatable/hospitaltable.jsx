@@ -1,7 +1,7 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from 
-"../../PatientDashboard/patientDatasrc";
+"../../PatientDashboard/HospitalDatasrc";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -31,7 +31,7 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Doctors Details
+        Hospital Details
       </div>
       <DataGrid
         className="datagrid"

@@ -12,7 +12,7 @@ import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSyst
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
-import { DarkModeContext } from "../../context/darkModeContext";
+import { DarkModeContext } from "../../../context/darkModeContext";
 import { useContext } from "react";
 
 const Sidebar = () => {
@@ -22,35 +22,36 @@ const Sidebar = () => {
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo">TEAM MEDSOLVE</span>
+          <p>Patient Portol</p>
         </Link>
       </div>
       <hr />
-      <div className="center">
+    <div className="center">
         <ul>
           <p className="title">HOME</p>
-          <Link to='/hospitalDashboard' style={{ textDecoration: "none" }}>
+          <Link to='/patientDashboard' style={{ textDecoration: "none" }}>
           <li>
             <DashboardIcon className="icon" />
             <span>Dashboard</span>
           </li>
-          </Link>
+        </Link>
           <p className="title">NAVIGATE</p>
-          <Link to="/patientDetails" style={{ textDecoration: "none" }}>
+          <Link to="/hospitalDetails" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Patient regestered</span>
+              <span>Hospital regestered</span>
             </li>
           </Link>
-          <Link to="/doctors" style={{ textDecoration: "none" }}>
+          <Link to="/healthreports" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" style={{ textDecoration: "none" }}/>
-              <span>Doctors Regestered</span>
+              <span>Health Reports</span>
             </li>
           </Link>
-          <Link to='/healthServices'  style={{ textDecoration: "none" }}>
+          <Link to='/calender'  style={{ textDecoration: "none" }}>
            <li>
             <CreditCardIcon className="icon" />
-            <span>Health Services Offered</span>
+            <span>Calender</span>
           </li>
           </Link>
           <p className="title">USER</p>

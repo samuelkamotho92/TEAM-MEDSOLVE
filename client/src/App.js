@@ -1,6 +1,10 @@
 import HospitalDashboard from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
+import DoctorsList from './pages/list/doctorList';
+import HospitalList from './pages/list/hospitalReg';
+import HospitalServicesList from './pages/list/hospitalServicelist';
+import HealthReports from './pages/list/healthReports';
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -45,12 +49,13 @@ return (
                 element={<New inputs={productInputs} title="Add New Product" />}
               />
             </Route>
-            <Route path='patientDetails'
-            
-            
-            >
-
-            </Route>
+            <Route path='patientDetails' element={<List />}>
+</Route>
+<Route path='hospitalDetails' element={<HospitalList  />}>
+</Route>
+<Route path="healthReports" element={<HealthReports />}></Route>
+<Route path="doctors" element={<DoctorsList />}></Route>
+<Route path="hospitalServices" element={<HospitalServicesList />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

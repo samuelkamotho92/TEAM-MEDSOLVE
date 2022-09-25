@@ -1,6 +1,6 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../PatientDashboard/patientDatasrc";
+import { userColumns, userRows } from "../hospitalServiceSrc";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -29,6 +29,7 @@ const Datatable = () => {
               Delete
             </div>
           </div>
+          
         );
       },
     },
@@ -36,10 +37,7 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Patient Details
-        <Link to="/users/new" className="link">
-          Add New Patient
-        </Link>
+        Hospital  Services
       </div>
       <DataGrid
         className="datagrid"

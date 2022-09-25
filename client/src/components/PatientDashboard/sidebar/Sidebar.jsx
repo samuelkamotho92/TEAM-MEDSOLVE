@@ -22,7 +22,7 @@ const Sidebar = () => {
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo">TEAM MEDSOLVE</span>
-          <p>Patient Portol</p>
+          <p>Hospital Portol</p>
         </Link>
       </div>
       <hr />
@@ -34,12 +34,12 @@ const Sidebar = () => {
             <DashboardIcon className="icon" />
             <span>Dashboard</span>
           </li>
-          </Link>
+        </Link>
           <p className="title">NAVIGATE</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
+          <Link to="/patientDetails" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Hospital regestered</span>
+              <span>patient regestered</span>
             </li>
           </Link>
           <Link to="/doctors" style={{ textDecoration: "none" }}>
@@ -48,7 +48,7 @@ const Sidebar = () => {
               <span>Doctors Regestered</span>
             </li>
           </Link>
-          <Link to='/healthServices'  style={{ textDecoration: "none" }}>
+          <Link to='/hospitalServices'  style={{ textDecoration: "none" }}>
            <li>
             <CreditCardIcon className="icon" />
             <span>Health Services Offered</span>
