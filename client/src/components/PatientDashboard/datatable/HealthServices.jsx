@@ -4,9 +4,10 @@ import { userColumns, userRows } from "../hospitalServiceSrc";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const Datatable = () => {
+const Datatable = (props) => {
+  console.log(props.services)
   const [data, setData] = useState(userRows);
-
+  
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };

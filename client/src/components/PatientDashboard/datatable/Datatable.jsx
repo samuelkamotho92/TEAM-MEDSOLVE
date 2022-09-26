@@ -1,10 +1,15 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../PatientDashboard/patientDatasrc";
+import { userColumns, userRows } 
+from "../../PatientDashboard/patientDatasrc";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const Datatable = () => {
+//recieve data as props and display down 
+
+const Datatable = (props) => {
+  console.log(props.patientValue);
+  //pass the props value as the userrows
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
